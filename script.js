@@ -23,7 +23,7 @@ const series = countries.map((country, countryIndex) => ({
 
 const linegraphData = {
     categories: years,
-    series: Array.from(series)
+    series
 }
 
  
@@ -56,17 +56,19 @@ tablesParent.insertBefore(el, table1);
 
 
 const table2 = document.getElementById("table2")
-const rows2 = document.querySelector("#table2 tbody")
+const rowsP = document.querySelector("#table2 thead")
 
-const countries2 = Array.from(rows.children).map(row => row.children[1].innerText).slice(1)
-const years2 = Array.from(rows.children[0].innerText.split("\t")).slice(2)
-const crimes2 = Array.from(rows.children).slice(1).map(child => Array.from(child.children).map(d => d.innerText).slice(2))
+const crimeData = document.querySelector("#table2 tbody")
+
+const countries2 = Array.from(crimeData.children).map(row => row.children[1].innerText).slice(1)
+const years2 = Array.from(rowsP.children[0].innerText.split("\t")).slice(2)
+const crimes2 = Array.from(crimeData.children).slice(1).map(child => Array.from(child.children).map(d => d.innerText).slice(2))
 
 
-const series2 = countries.map((country, countryIndex) => ({
-    name2: country,
-    data2: years.map((_, yearIndex) => {
-        const value2 = crimes[countryIndex][yearIndex].replace(":",null)
+const series2 = countries2.map((country, countryIndex) => ({
+    name: country,
+    data: years2.map((_, yearIndex) => {
+        const value2 = crimes2[countryIndex][yearIndex].replace(":",null)
 
         const parsed = parseInt(value2, 10)
         if (isNaN(parsed)) {
@@ -77,16 +79,16 @@ const series2 = countries.map((country, countryIndex) => ({
 }))
 
 const linegraphData2 = {
-    categories2: years,
-    series2: Array.from(series)
+    categories: years2,
+    series:series2
 }
-
+console.log(linegraphData);
+console.log(linegraphData2);
  
 // CONFIGURATION du graphique :
 const options2 = {
-    chart2: { width: 900, height: 2800 },
-    stack: true,
-    series2: {
+    chart: { width: 600, height: 800 },
+    series: {
         eventDetectType: 'grouped',
         responsive: true
     }
@@ -97,8 +99,8 @@ const el2 =  document.createElement("div");
 el2.setAttribute("id", "chart")
 
 // IMPORT de la bibliothèque :
-toastui.Chart.lineChart({el2, data2: linegraphData2, options2});
+toastui.Chart.lineChart({el:el2, data: linegraphData2, options:options2});
 
 // Cible pour insérer le graphique au dessus des tables
-const tablesParent2 = document.getElementById("mw-content-text")
-tablesParent2.insertBefore(el2, table2);  
+// const tablesParent2 = document.getElementById("mw-content-text") (plus besoin car déjà déclaré pour graph 1, mêmes parents)
+tablesParent.insertBefore(el2, table2);  
