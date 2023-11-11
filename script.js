@@ -41,7 +41,7 @@ const options = {
 const el =  document.createElement("div");
 el.setAttribute("id", "chart1")
 
-// IMPORT de la bibliothèque :
+// géneration grpah avec bibliothèque :
 toastui.Chart.lineChart({el, data: linegraphData, options});
 
 // Cible pour insérer le graphique au dessus des tables
@@ -82,12 +82,10 @@ const linegraphData2 = {
     categories: years2,
     series:series2
 }
-console.log(linegraphData);
-console.log(linegraphData2);
  
 // CONFIGURATION du graphique :
 const options2 = {
-    chart: { width: 600, height: 800 },
+    chart: { width: 1000, height: 800 },
     series: {
         eventDetectType: 'grouped',
         responsive: true
@@ -104,3 +102,4 @@ toastui.Chart.lineChart({el:el2, data: linegraphData2, options:options2});
 // Cible pour insérer le graphique au dessus des tables
 // const tablesParent2 = document.getElementById("mw-content-text") (plus besoin car déjà déclaré pour graph 1, mêmes parents)
 tablesParent.insertBefore(el2, table2);  
+
